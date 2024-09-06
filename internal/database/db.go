@@ -2,6 +2,7 @@ package database
 
 import (
 	"log"
+	"fmt"
 
 	"github.com/5afar/Junior_Backend_To-Do/internal/models"
 	"github.com/jinzhu/gorm"
@@ -10,9 +11,9 @@ import (
 
 var DB *gorm.DB
 
-func Init() {
+func Init(host, user, dbname, password string) {
 	var err error
-	connStr := "host=192.168.0.14 user=postgres dbname=todoapp sslmode=disable password=postgres"
+	connStr := fmt.Sprintf("host=%s user=%s dbname=%s sslmode=disable password=%s",host,user,dbname,password)
 	DB, err = gorm.Open("postgres", connStr)
 	if err != nil {
 		log.Fatal("failed to connect database: ", err)

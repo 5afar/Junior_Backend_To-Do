@@ -4,13 +4,16 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/gorilla/mux"
+	"github.com/5afar/Junior_Backend_To-Do/internal/config"
 	"github.com/5afar/Junior_Backend_To-Do/internal/database"
 	"github.com/5afar/Junior_Backend_To-Do/internal/handlers"
+	"github.com/gorilla/mux"
 )
 
 func Run(){
-	database.Init()
+	config.LoadEnv()
+	cfg:=config.NewConfig()
+	database.Init(cfg.DBHost,cfg.DBUser,cfg.DBName,cfg.DBPass)
 
 	r := mux.NewRouter()
 
